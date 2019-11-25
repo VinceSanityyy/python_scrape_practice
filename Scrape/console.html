@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <h2>asdf</h2>
+</body>
+<script language="JavaScript"  src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.0/jquery.min.js"></script>
+<script type="text/javascript">
+xhr.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+var URL = 'https://www.propertyguru.com.sg/property-for-sale?sort=date&order=desc&market=residential&property_type_code%5B%5D=CONDO&property_type_code%5B%5D=APT&property_type_code%5B%5D=WALK&property_type_code%5B%5D=CLUS&property_type_code%5B%5D=EXCON&property_type=N&newProject=all'
+
+$.getJSON(URL, function(data){
+	console.log('asdasda');
+	console.log(data)
+	}
+);
+</script>
+</html>

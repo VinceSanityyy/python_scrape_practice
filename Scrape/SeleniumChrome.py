@@ -1,6 +1,9 @@
 from selenium import webdriver
 import mysql.connector
 import csv
+import os
+import urllib
+import urllib.request
 
 max_page_num = 3000
 
@@ -30,23 +33,30 @@ for i in range(0, max_page_num,120):
 
     url = 'https://vancouver.craigslist.org/search/ela?s='+ page_num + ''
     driver.get(url)
-    # print(url)
+   
 
-    # driver.find_element_by_xpath("""//*[@id="sss0"]/li[23]/a""").click()
-    # driver.find_elements_by_class_name('result')
 
     x = driver.find_elements_by_class_name('hdrlnk')
-    y = driver.find_elements_by_class_name('result-price')
-   
-    # with open('products.csv', 'a',newline='',encoding='utf-8') as f:
-    #        for i in range(len(x)):
-    #             f.write(x[i].text +'\n')
-    for i in range(len(x)):
+    y = driver.find_elements_by_xpath('//p[@class="result-info"]/span[@class="result-meta"]//span[@class="result-price"]')
+    # images = driver.find_elements_by_xpath('//*[@id="sortable-results"]/ul/li/a/img')
+    images = driver.find_elements_by_tag_name('img')
+    # images = driver.find_elements_by_xpath('//li[@class="result-row"]/a[@class="result-image gallery"]//img[@class=""]')
+    for i, image in enumerate(images):
+        asdf = image.get_attribute("src")
         prod = (x[i].text)
-        sql =  """INSERT INTO products (name) VALUES (%s)"""
-        mycursor.execute(sql,(prod,))
-        mydb.commit()
+        price = (y[i].text)
+        print("prod", prod, "price", price, "image", asdf)
+        
+    #   for i in range(len(x)):
+    #     asdf = img.get_attribute("src")
+    #     prod = (x[i].text)
+    #     price = (y[i].text)
+    #     image = asdf
+    #     print("prod", prod, "price", price, "image", image)
+        # sql =  """INSERT INTO products (name,price,image) VALUES (%s,%s,%s)"""
+        # mycursor.execute(sql,(prod,price,image))
+        # mydb.commit()
 
-    
+
    
 driver.close()
